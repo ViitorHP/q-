@@ -8,8 +8,17 @@
 
 body {
     font-family: "Roboto", serif;
-    background-image: url('fundo.jpg');
+    background-image: url('fundo.jfif');
+    background-size: cover; /* Isso faz com que a imagem cubra toda a tela */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-attachment: fixed; /* Faz com que a imagem fique fixa no fundo */
+    background-position: center center; /* Centraliza a imagem */
+    margin: 0; /* Remove a margem padrão */
+    background-color: rgba(255, 198, 198, 0.5); /* cor #FFC6C6 com 50% de transparência */
+    height: 100vh; /* Garante que o fundo cubra toda a altura da página */
+    width: 100vw; /* Garante que o fundo cubra toda a largura da página */
 }
+
 
 .card-wrapper {
     perspective: 1000px;
@@ -25,11 +34,13 @@ body {
     will-change: transform;
     transition: transform 250ms;
     box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .envelope:hover .card {
     transform: rotateY(-15deg);
     transition-delay: 1750ms;
+    
 }
 
 /* Card cover styling */
@@ -43,7 +54,102 @@ body {
     transition: transform 500ms 0ms;
 }
 
-v
+.envelope:hover .card-cover {
+    transform: rotateY(-135deg);
+    transition-delay: 2250ms;
+}
+
+.card-side {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background-color: #fff;
+    display: grid;
+    place-items: center;
+}
+
+.card-side-secondary {
+    background-color: #fff;
+    transform: rotateY(180deg);
+    box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    position: relative;
+    font-weight: 300;
+    text-align: center;
+    user-select: none;
+}
+
+.card-title span {
+    display: block;
+}
+
+.card-title-secondary{
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.card-title-main {
+    font-family: "Petemoss", serif;
+    font-size: 64px;
+    font-weight: 400;
+}
+
+.card-title-apostrophe {
+    position: absolute;
+    top: 34px;
+    right: 8px;
+    font-size: 8px;
+}
+
+/* Card body styling */
+.card-body {
+    font-family: "Shantell Sans", serif;
+    padding: 1px;
+}
+
+.card-body p {
+    font-size: 10px;
+    font-weight: 300;
+}
+.card-body p+p {
+    margin-top: 10px;
+}
+
+/* Envelope styling */
+.envelope {
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1px #000;
+}
+
+.envelope::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-top: 75px solid transparent;
+    border-right: 150px solid white;
+    border-bottom: 125px solid white;
+    border-left: 150px solid white;
+}
+
+.envelope:hover .card-wrapper {
+    animation: show-card 1000ms 600ms forwards;
+}
+
+.envelope:not(:hover) .card-wrapper {
+    animation: hide-card 1000ms forwards;
+}
 
 /* Keyframes */
 @keyframes show-card {
@@ -75,11 +181,26 @@ v
     }
 }
 
+width: 300px;
+    height: 200px;
+    background-color: #fff; /* Cor mais neutra */
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 12px; /* Bordas mais suaves */
+    transition: all 0.3s ease; /* Transições mais suaves */
+}
 /* Card lid styling */
 .envelope-lid {
     position: absolute;
     inset: 0;
     z-index: 1;
+    background-color: #f9f9f9; /* Cor mais suave para a tampa */
+    border-radius: 12px; /* Borda arredondada para a tampa */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra discreta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .envelope-lid::before,
@@ -89,25 +210,26 @@ v
     top: 0;
     width: 1px;
     height: calc(100% - 31.85px);
-    background-color: #000;
+    background-color: #bbb; /* Cor suave para as linhas diagonais */
+    transition: transform 0.3s ease-out;
 }
 
 .envelope-lid::before {
     left: 0;
-    transform: rotate(-63.1deg);
+    transform: rotate(-63.1deg); /* Ângulo das linhas */
     transform-origin: top left;
 }
 
 .envelope-lid::after {
     right: 0;
-    transform: rotate(63.1deg);
+    transform: rotate(63.1deg); /* Ângulo das linhas */
     transform-origin: top right;
 }
 
 .envelope-lid-secondary {
-    background-color: #fff;
+    background-color: #f9f9f9;
     clip-path: polygon(50% 38%, 0 0, 100% 0);
-    transition: transform 500ms 1000ms;
+    transition: transform 0.5s ease 0.2s; /* Animação suave de rotação */
     transform-origin: top;
 }
 
